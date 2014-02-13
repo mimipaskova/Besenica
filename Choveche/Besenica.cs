@@ -19,17 +19,30 @@ namespace Choveche
         /// Reading from text file
         /// </summary>
         /// <param name="args"></param>
-        static void read()
+        static string read()
         {
-            StreamReader reader = new StreamReader("Words.txt");
-            string[] file = new string[10];
+            Random rand = new Random();
+           
+            StreamReader reader = new StreamReader("Words.txt",System.Text.Encoding.Unicode);                      
             string line=reader.ReadLine();
+
+            int i = 1;
+            int lineNumber = rand.Next(1, 10);
+            string word=line;
+
             while(line  != null)
-            {                
+            {
+                if (i == lineNumber)
+                {
+                    word = line;
+                }
                 Console.WriteLine(line);
                 line = reader.ReadLine();
-            }                   
+                i++;
+            }        
+      
             reader.Close();
+            return word;             
         }
 
         /// <summary>
@@ -85,33 +98,33 @@ namespace Choveche
         static void Main(string[] args)
         {
 
-            read();
-            
-            string word = Console.ReadLine();
+            Console.WriteLine(read());
+
+            string word = read();
             Console.Clear();
             finalWord = new char[word.Length];
 
             for (int i = 0; i < word.Length; i++)
             {
                 Console.Write("*");
-                finalWord[i]='*';
+                finalWord[i] = '*';
             }
             Console.WriteLine();
 
-            
-            
+
+
 
             while (lives > 0 && isStars(word))
             {
                 //Console.WriteLine(lives);
                 //Console.SetCursorPosition(0, k+1);
-               
+
                 char letter = (char)Console.Read();
-                
+
                 LetterFound(word, letter);
                 Console.ReadLine();
-                
-            }            
+
+            }
 
         }
 
@@ -120,13 +133,13 @@ namespace Choveche
 
         public static void mimi()
         {
-            int[] matrix = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+            int[] matrix = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 
             for (int i = 0; i < Math.Sqrt(matrix.Length); i++)
             {
                 for (int j = 0; j < Math.Sqrt(matrix.Length); j++)
                 {
-                    Console.Write(matrix[j+i*(int)Math.Sqrt(matrix.Length)]);
+                    Console.Write(matrix[j + i * (int)Math.Sqrt(matrix.Length)]);
                 }
                 Console.WriteLine();
             }
